@@ -1,0 +1,56 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Sinabs
+ * @package     Sinabs_AutomaticResponse
+ * @copyright   Copyright (c) 2012 Sinabs (http://www.sinabs.fr)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+class Sinabs_AutomaticResponse_Block_Adminhtml_Mail_View extends Mage_Adminhtml_Block_Widget_Form_Container
+{
+	/**
+     * Initialize view container
+     *
+     */
+	public function __construct()
+	{
+		$this->_objectId = 'mail';
+		$this->_controller = 'adminhtml_mail';
+		$this->_mode = 'view';
+		$this->_blockGroup = 'automaticresponse';
+		
+		parent::__construct();
+		
+		$this->_removeButton('reset');
+		$this->_removeButton('save');
+		
+		$this->setId('automaticresponse_mail_view');
+		
+		$this->_addButton('back', array(
+            'label'     => Mage::helper('adminhtml')->__('Back'),
+            'onclick'   => 'setLocation(\'' . $this->getBackUrl() . '\')',
+            'class'     => 'back',
+        ), -1);
+	}
+	
+	 /**
+     * Retrieve header text
+     *
+     * @return string
+     */
+    public function getHeaderText()
+    {
+        return Mage::helper('automaticresponse')->__('Email #%s', Mage::registry('current_mail')->getId());
+    }
+}

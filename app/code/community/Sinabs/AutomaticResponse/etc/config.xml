@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Sinabs
+ * @package     Sinabs_AutomaticResponse
+ * @copyright   Copyright (c) 2012 Sinabs (http://www.sinabs.fr)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+	<modules>
+		<Sinabs_AutomaticResponse>
+			<version>0.2.1</version>
+		</Sinabs_AutomaticResponse>
+	</modules>
+	<global>
+		<helpers>
+			<automaticresponse>
+				<class>Sinabs_AutomaticResponse_Helper</class>
+			</automaticresponse>
+		</helpers>
+		<blocks>
+			<automaticresponse>
+				<class>Sinabs_AutomaticResponse_Block</class>
+			</automaticresponse>
+		</blocks>
+		<models>
+			<automaticresponse>
+				<class>Sinabs_AutomaticResponse_Model</class>
+				<resourceModel>automaticresponse_mysql4</resourceModel>
+			</automaticresponse>
+			<automaticresponse_mysql4>
+				<class>Sinabs_AutomaticResponse_Model_Mysql4</class>
+				<entities>
+					<mail>
+						<table>sinabs_automaticresponse_mail</table>
+					</mail>
+				</entities>
+			</automaticresponse_mysql4>
+		</models>
+		<events>
+			<controller_action_postdispatch_contacts_index_post>
+				<observers>
+					<sinabs_automaticresponse_contacts_post_observer_send>
+						<type>singleton</type>
+						<class>Sinabs_AutomaticResponse_Model_Observer</class>
+						<method>sendAutomaticResponse</method>
+					</sinabs_automaticresponse_contacts_post_observer_send>
+					<sinabs_automaticresponse_contacts_post_observer_save>
+						<type>singleton</type>
+						<class>Sinabs_AutomaticResponse_Model_Observer</class>
+						<method>saveEmail</method>
+					</sinabs_automaticresponse_contacts_post_observer_save>
+				</observers>
+			</controller_action_postdispatch_contacts_index_post>
+		</events>
+		<resources>
+            <automaticresponse_setup>
+                <setup>
+                    <module>Sinabs_AutomaticResponse</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </automaticresponse_setup>
+            <automaticresponse_write>
+            	<connection>
+            		<use>core_write</use>
+            	</connection>
+            </automaticresponse_write>
+            <automaticresponse_read>
+            	<connection>
+            		<use>core_read</use>
+            	</connection>
+            </automaticresponse_read>
+        </resources>
+		<template>
+			<email>
+				<automaticresponse_general_template translate="label" module="automaticresponse">
+					<label>Automatic Response</label>
+					<file>automatic_response.html</file>
+					<type>html</type>
+				</automaticresponse_general_template>
+				<automaticresponse_general_template_comment translate="label" module="automaticresponse">
+					<label>Automatic Response Comment</label>
+					<file>automatic_response_comment.html</file>
+					<type>html</type>
+				</automaticresponse_general_template_comment>
+			</email>
+		</template>
+	</global>
+	<frontend>
+		<routers>
+			<Sinabs_AutomaticResponse>
+				<use>standard</use>
+				<args>
+					<module>Sinabs_AutomaticResponse</module>
+					<frontName>automaticresponse</frontName>
+				</args>
+			</Sinabs_AutomaticResponse>
+		</routers>
+	</frontend>
+	<admin>
+		<routers>
+			<automaticresponse_admin>
+				<use>admin</use>
+				<args>
+					<module>Sinabs_AutomaticResponse</module>
+					<frontName>automaticresponse_admin</frontName>
+				</args>
+			</automaticresponse_admin>
+		</routers>
+	</admin>
+	<adminhtml>
+		<translate>
+            <modules>
+                <Sinabs_AutomaticResponse>
+                    <files>
+                        <default>Sinabs_AutomaticResponse.csv</default>
+                    </files>
+                </Sinabs_AutomaticResponse>
+            </modules>
+        </translate>
+		<menu>
+			<system>
+				<children>
+					<automaticresponse translate="title" module="adminhtml">
+						<title>Emails saved</title>
+						<action>automaticresponse_admin/adminhtml_mail</action>
+					</automaticresponse>
+				</children>
+			</system>
+		</menu>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<automaticresponse translate="title" module="automaticresponse">
+											<title>Section Automatic Response</title>
+										</automaticresponse>
+									</children>
+								</config>
+							</children>
+							<children>
+								<automaticresponse translate="title" module="automaticresponse">
+									<title>Emails saved</title>
+								</automaticresponse>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<automaticresponse>
+					<file>sinabs_automaticresponse.xml</file>
+				</automaticresponse>
+			</updates>
+		</layout>
+	</adminhtml>
+	<default>
+		<automaticresponse>
+			<general>
+				<sender_email_identity>general</sender_email_identity>
+				<template>automaticresponse_general_template</template>
+				<template_comment>automaticresponse_general_template_comment</template_comment>
+			</general>
+		</automaticresponse>
+	</default>
+</config>

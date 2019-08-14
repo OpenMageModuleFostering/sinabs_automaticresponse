@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/Sinabs_AutomaticResponse",
+    "type": "magento-module",
+    "license": "OSL",
+    "homepage": "",
+    "description": "Automatic response to requests for contact and archiving.",
+    "authors": [
+    {
+        "name": "Sinabs",
+        "email": "tech@sinabs.fr"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

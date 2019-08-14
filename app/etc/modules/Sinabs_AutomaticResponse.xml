@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+	<modules>
+		<Sinabs_AutomaticResponse>
+			<active>true</active>
+			<codePool>community</codePool>
+		</Sinabs_AutomaticResponse>
+	</modules>
+</config>

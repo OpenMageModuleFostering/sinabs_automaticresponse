@@ -1,0 +1,41 @@
+<!--@subject [RE] Contact Form @-->
+<!--@vars
+{"var name":"Sender Name",
+"var email":"Sender Email",
+"var comment":"Comment",
+"var comment_client":"Client Comment"}
+@-->
+<div style="font: 11px/ 1.35em Verdana, Arial, Helvetica, sans-serif;">
+<table cellspacing="0" cellpadding="0" border="0" width="98%"
+	style="margin-top: 10px; font: 11px/ 1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom: 10px;">
+	<tr>
+		<td align="center" valign="top"><!-- [ header starts here] -->
+		<table cellspacing="0" cellpadding="0" border="0" width="650">
+			<tr>
+				<td valign="top">
+				<p><a href="{{store url=""}}" style="color: #1E7EC8;"><img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}" border="0" /></a></p>
+				</td>
+			</tr>
+		</table>
+		<table cellspacing="0" cellpadding="0" border="0" width="650">
+			<tr>
+				<td valign="top">
+					<p><strong>Hello {{var name}},</strong>
+					<p>
+						{{var comment}}
+					</p>
+					<p><strong>Your Message: </strong></p>
+					<p>
+						{{var comment_client}}
+					</p>
+					<p>
+						Regards,<br />
+						<strong>Team {{var store.getFrontendName()}}</strong>
+					</p>
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+</div>
